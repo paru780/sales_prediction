@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Clustering Data</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/dashboard_style.css')}}">
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <h1> Clustering Of Data</h1>
+        <form id="clusterform" action="/cluster" method="post">
+            <div>
+                <label for="column1">COLUMN 1</label>
+                <select id="column1", name="column1" required>
+                    <option value="" disabled selected> SELECT COLUMN 1</option>
+                    {% for col in columns %}
+                    <option value="{{col}}">{{ col }}</option>
+                    {% endfor %}
+                </select>
+                <label for="column2">COLUMN 2</label>
+                <select id="column2", name="column2" required>
+                    <option value="" disabled selected> SELECT COLUMN 2</option>
+                    {% for col in columns %}
+                    <option value="{{col}}">{{ col }}</option>
+                    {% endfor %}
+                </select> 
+            <br>
+            <button type="submit">GENERATE</button>
+        </form>
+
+        {% if image_file %}
+            <h2> GENERATED CLUSTER:</h2>
+            <img src="{{ url_for('static',filename=image_file)}}" alt="selected plotted cluster is not available">
+        {% endif %}
+    </body>
+</html>

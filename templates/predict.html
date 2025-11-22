@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> CAR SALES PREDICTION FORM</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            
+            </ul>
+        </nav>
+        <h1>Car Sales Prediction</h1>
+        <form id="predict_form" action="/predict" method="post" autocomplete="on">
+
+            <label for="compprice">CompPrice</label>
+            <input type="number" id="compprice" name="CompPrice" value="{{ input_data['CompPrice'] if input_data else ''}}" min="75" steps="1" required>
+
+            <label for="income">Income</label>
+            <input type="number" id="income" name="Income" value="{{ input_data['Income'] if input_data else ''}}" min="21" steps="1" required>
+
+            <label for="advertising">Advertising</label>
+            <input type="number" id="advertising" name="Advertising" value="{{ input_data['Advertising'] if input_data else ''}}" min="0" steps="1" required>
+
+            <label for="population">Population</label>
+            <input type="number" id="population" name="Population" value="{{ input_data['Population'] if input_data else ''}}" min="10" steps="1" required>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="Price" value="{{ input_data['Price'] if input_data else ''}}" min="24" steps="1" required>
+
+            <label for="age">Age</label>
+            <input type="number" id="age" name="Age" value="{{ input_data['Age'] if input_data else ''}}" min="25" steps="1" required>
+
+            <label for="education">Education</label>
+            <input type="number" id="education" name="Education" value="{{ input_data['Education'] if input_data else ''}}" min="10" steps="1" required>
+
+            <label for="shelveloc">ShelveLoc</label>
+            <input type="text" id="Shelveloc" name="ShelveLoc" value="{{ input_data['ShelveLoc'] if input_data else ''}}" required>
+
+            <label for="urban">Urban</label>
+            <input type="text" id="Urban" name="Urban" value="{{ input_data['Urban'] if input_data else ''}}" required>
+
+            <label for="us">US</label>
+            <input type="text" id="US" name="US" value="{{ input_data['US'] if input_data else ''}}" required>
+
+            <button type="submit">Sales predict</button>
+
+            <div id="result">
+                <label>Predicted Sales Of Car:</label>
+                <span id="predictedsales">{{prediction}}</span>
+            </div>
+        </form>
+    </body>
+</html>

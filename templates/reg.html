@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>REGULARIZATION</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <h1> REGULARIZATION</h1>
+        <form action="/reg" method="post">
+            <button type="submit">GENERATE</button>
+            <div id="result">
+                <label> regularization L1(LASSO) and L2(RIDGE):</label>
+                <div id="r2_ridge">Ridge r2_score: {{ r2_ridge }}</div>
+                <div id="r2_lasso"> Lasso r2_score: {{ r2_lasso }}</div>
+            </div>
+        </form>
+    </body>
+</html>

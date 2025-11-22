@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> CAR SALES PREDICTION FORM</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <div>
+            <img src="{{ url_for('static',filename='final_fifa_style_dashboard.png')}}" alt="DASBOARD" >
+        </div>
+    </body>
+</html>
+
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Exploratory Data Analysis</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <h1>Exploratory Data Analysis</h1>
+        <form id="edaform" action="/eda" method="post">
+            <label for="xcolumn">X-Axis Column</label>
+            <select id="xcolumn" name="xcolumn" required>
+                <option value="" disabled selected>Select X Column</option>
+                {% for col in columns %}
+                <option value="{{col}}">{{col}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="ycolumn">Y-Axis Column</label>
+            <select id="ycolumn" name="ycolumn" >
+                <option value="" disabled selected>Select Y Column</option>
+                {% for col in columns %}
+                <option value="{{col}}">{{col}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="plottype">Plot Type</label>
+            <select id="plottype" name="plottype" required>
+                <option value="" disabled selected>Select Plot Type</option>
+                <option value="scatter">Scatter Plot</option>
+                <option value="line">Line Plot</option>
+                <option value="bar">Bar Graph</option>
+                <option value="hbar">Horizontal Bar Graph</option>
+                <option value="hist">Histogram</option>
+                <option value="pie">Pie Chart</option>
+            </select>
+
+            <button type="submit">Generate Plot</button>
+        </form>
+
+        {% if image_file %}
+           <h2> GENERATED CHART:-</h2>
+           <img src="{{url_for('static',filename=image_file)}}" alt="SELECTED PLOT IS INVALID">
+        {% endif %}
+
+    </body>
+</html>

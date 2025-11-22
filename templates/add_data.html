@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> CAR SALES PREDICTION FORM</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <h1> ENTER DATA </h1>
+        <form method="post" action="add_data">
+            {% for name, dtype in columns %}
+            <div>
+                <label for="{{ name }}">{{ name.replace('_',' ').title() }}:</label>
+                {% if dtype in ['int'] %}
+                   <input type="number" id="{{ name }}" name="{{ name }}" min="0" step="1" required>
+                {% elif dtype in ['float'] %}
+                   <input type="number" id="{{ name }}" name="{{ name }}" min="0" step="0.01" required>
+                {% else %}
+                   <input type="text" id="{{ name }}" name="{{ name }}" required>
+                {% endif %}
+            </div>
+            <br>
+            {% endfor %}
+            <button type="submit">Submit-View</button>
+        </form>
+        {% if message %}
+           <div id="message">
+              <label>{{message}}</label>
+           </div>
+        {% endif %}
+
+        {% if data %}
+           <h2>Stored Data</h2>
+           <table border="1" cellspacing="0" cellpadding="8">
+                <thead>
+                    <tr>
+                        {% for col in data[0].keys() %}
+                           <th>{{ col.replace('_',' ').title() }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                       <tr>
+                        {% for col in row %}
+                           <td>{{ row[col] }}</td>
+                        {% endfor %}
+                       </tr>
+                    {% endfor %}
+                </tbody>
+           </table>
+        {% else %}
+           <p>No Data Stored Yet.</p>
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PRINCIPLE COMPONENT ANALYSIS</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>                  
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <h1> PRINCIPLE COMPONENT ANALYSIS</h1>
+        <form action="/pca" method="post">
+            <button type="submit">GENERATE PCA</button>
+            <div id="result">
+                <label> Model Plot:</label>
+                <div id="mse">Mean_squared_error: {{ mse }}</div>
+                <div id="r2">r2_score: {{ r2 }}</div>
+                <div id="loaded_r2">loaded_pipeline_r2: {{ loaded_r2 }}</div>
+                {% if image_file %}
+                    <img src="{{ url_for('static', filename=image_file) }}" alt="PCA Plot">
+                {% endif %}
+
+            </div>
+    </body>
+</html>

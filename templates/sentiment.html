@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>SENTIMENTAL ANALYSIS</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_style.css')}}">
+    </head>
+    <body>
+        <nav>
+            <div> ANALYTICS DASHBOARD</div>
+            <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/predict">Prediction</a></li>
+                <li><a href = "/eda">Exploratory Data Analysis</a></li>
+                <li><a href = "/train">Model Training</a></li>
+                <li><a href = "/add_data">Add Data</a></li>
+                <li><a href = "/cluster">Cluster</a></li>
+                <li><a href = "/pca">PCA</a></li>
+                <li><a href = "/cv">Cross Validation</a></li>
+                <li><a href = "/reg">Regularizarion</a></li>
+                <li><a href = "/rnn">RNN</a></li>
+                <li><a href = "/sentiment">Sentimental Analysis</a></li>
+            </ul>
+        </nav>
+        <h1> SENTIMENTAL ANALYSIS</h1>
+        <form action="/sentiment" method="post">
+            <label for="comment">Enter Your Comment:</label><br>
+            <textarea id="comment" name="comment" rows="6" cols="60"></textarea><br><br>
+            <button type="submit">Analyze Sentiment</button>
+          <div id="result">
+               <h2>Analysed Result:</h2>
+                {% if sentiment %}
+                  <h3>Predicted Sentiment: {{ sentiment }}</h3>
+                   {% if image_file %}
+                     <img src="{{ url_for('static', filename=image_file) }}" alt="{{ sentiment }} image">
+                   {% endif %}
+                {% endif %}
+                
+            </div>
+        </form>
+       
+    </body>
+</html>
