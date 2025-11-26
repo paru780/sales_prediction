@@ -344,12 +344,13 @@ def rnn():
         x_train, y_train = create_sequences(train_norm, window_size)
         x_test, y_test = create_sequences(test_norm, window_size)
         num_features = len(features)
-        model = tf.keras.Sequential([
+        """ model = tf.keras.Sequential([
             layers.SimpleRNN(50, input_shape=(window_size, num_features), activation='tanh'),
             layers.Dense(1)
         ])
         model.compile(optimizer='adam', loss='mse')
-        model.fit(x_train,y_train, epochs=50, batch_size=32, validation_split=0.2)
+        model.fit(x_train,y_train, epochs=50, batch_size=32, validation_split=0.2) """
+        model = load_model('rnn_model.keras')
         print(model.evaluate(x_test,y_test))
         true_c = y_test * (maxs - mins) + mins
         prediction_norm = model.predict(x_test)
@@ -396,7 +397,7 @@ def sentiment():
         MAX_LEN = 100
         tokenizer = Tokenizer(num_words = MAX_WORDS)
         tokenizer.fit_on_texts(train_texts)
-        model = Sequential([
+        """ model = Sequential([
             Embedding(MAX_WORDS,128, input_length=MAX_LEN),
             Bidirectional(LSTM(64, dropout=0.2 ,recurrent_dropout=0.2)),
             Dropout(0.2),
@@ -404,7 +405,8 @@ def sentiment():
         ])
         model.compile(optimizer=Adam(learning_rate=1e-3), loss='categorical_crossentropy', metrics = ['accuracy'])
         model.fit(pad_sequences(tokenizer.texts_to_sequences(train_texts), maxlen=MAX_LEN, padding='post', truncating='post'), train_labels, epochs=25, batch_size=32,
-            validation_data = (pad_sequences(tokenizer.texts_to_sequences(val_texts), maxlen=MAX_LEN, padding='post', truncating='post'), val_labels),verbose=1)
+            validation_data = (pad_sequences(tokenizer.texts_to_sequences(val_texts), maxlen=MAX_LEN, padding='post', truncating='post'), val_labels),verbose=1) """
+        model = load_model('sentiment_model.keras')
         def clean_text(s):
             s = s.lower()
             filtered = ''.join(ch if( ch.isalpha() or ch.isspace()) else ' ' for ch in s)
@@ -432,4 +434,5 @@ def sentiment():
 if __name__ == '__main__':
     app.run(debug=True)
     
+
 
